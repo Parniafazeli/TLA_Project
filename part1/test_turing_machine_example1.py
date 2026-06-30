@@ -22,7 +22,6 @@ def print_states(transition_mapping):
 def run(input_):
     machine = TuringMachine(transitions)
     print("Input:", input_)
-    # اجرای ژنراتور و چاپ هر پیکربندی
     for action, config in machine.run(input_):
         left = ''.join(reversed(config['left_hand_side']))
         right = ''.join(config['right_hand_side'])
