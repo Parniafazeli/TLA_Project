@@ -45,33 +45,28 @@ def _parse_plaintext(content):
     live_cells = []
     max_col = 0
     row = 0
-    
+    started = False
     for line in lines:
-        line = line.strip()
-        # Skip empty lines and comments
-        if not line or line.startswith('!'):
-            continue
-        # Remove leading spaces (plaintext files may have indentation)
+        stripped = line.strip()
+        if not started:
+            if not stripped or stripped.startswith('!'):
+                continue          # header/comments before the pattern body
+            started = True
+        else:
+            if stripped.startswith('!'):
+                continue          # (rare) trailing comment, not a row
         start = 0
         while start < len(line) and line[start] == ' ':
             start += 1
-        # Process cells
         for col, ch in enumerate(line[start:], start=start):
             if ch == 'O':
                 live_cells.append((row, col))
-            elif ch == '.':
-                pass  # Dead cell - do nothing
-            else:
-                # Ignore unexpected characters (like spaces)
-                pass
             if col > max_col:
                 max_col = col
-        row += 1
-    
+        row += 1                  # blank rows now correctly count as a row
     height = row
     width = max_col + 1
     return width, height, live_cells
-
 
 def _parse_rle(content):
     """
@@ -309,15 +304,15 @@ class GameOfLife:
         self.grid[index[0] + 4, index[1] + 37] = self.aliveValue
 
         # FIXED: corrected left block coordinates (shifted back by 1 column)
-        self.grid[index[0] + 5, index[1] + 1] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 2] = self.aliveValue
+        self.grid[index[0] + 5, index[1] + 3] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 12] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 18] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 22] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 23] = self.aliveValue
 
-        self.grid[index[0] + 6, index[1] + 1] = self.aliveValue
         self.grid[index[0] + 6, index[1] + 2] = self.aliveValue
+        self.grid[index[0] + 6, index[1] + 3] = self.aliveValue
         self.grid[index[0] + 6, index[1] + 12] = self.aliveValue
         self.grid[index[0] + 6, index[1] + 16] = self.aliveValue
         self.grid[index[0] + 6, index[1] + 18] = self.aliveValue
@@ -341,6 +336,10 @@ class GameOfLife:
         Insert cells from pattern file using parse_pattern
         '''
         width, height, live_cells = parse_pattern(filename)
+        print("width =", width)
+        print("height =", height)
+        print("live cells =", len(live_cells))
+        
         for r, c in live_cells:
             target_r = index[0] + r
             target_c = index[1] + c
