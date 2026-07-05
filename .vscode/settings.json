@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./part1"
+    ],
+    "python-envs.defaultEnvManager": "ms-python.python:system"
+}
