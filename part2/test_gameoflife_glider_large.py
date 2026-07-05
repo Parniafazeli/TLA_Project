@@ -22,7 +22,6 @@ def main():
     # life.insertFromFile("stargate oscillator.cells", (100,100))
     # life.insertFromFile("7enginecordership spaceship.cells", (100,100))
     life.insertFromFile("3enginecordership gun 279x258.cells", (100, 100))
-
     # In a cellular automaton, a gun is a pattern with a main part that repeats periodically, like an oscillator,
     # and that also periodically emits spaceships. but here the gun is not emit periodically and the left end did not work.
     run_pygame_life(
