@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Pygame visualizer for Langton's Ant.
-
-This script uses the existing langton.py module for the simulation logic and
-renders the grid plus the ant position in a pygame window.
-"""
-
 import argparse
-
-import numpy as np
 import pygame
 
 from langton import LangtonsAnt
@@ -38,92 +30,100 @@ PALETTE = [
 ]
 
 
-def build_surface(grid, cell_scale, ant_position=None, ant_color=(220, 40, 40)):
-    """Convert the ant grid into a pygame surface."""
-    rows, cols = grid.shape
-    surface = pygame.Surface((cols * cell_scale, rows * cell_scale))
+def draw_grid(board, cell_size, ant_pos=None, ant_color=(220, 40, 40)):
+    rows, cols = board.shape
+    surface = pygame.Surface((cols * cell_size, rows * cell_size))
 
-    for r in range(rows):
-        for c in range(cols):
-            state = int(grid[r, c])
-            color = PALETTE[state % len(PALETTE)]
+    for row in range(rows):
+        for col in range(cols):
+            color = PALETTE[int(board[row, col]) % len(PALETTE)]
             pygame.draw.rect(
                 surface,
                 color,
-                pygame.Rect(c * cell_scale, r * cell_scale, cell_scale, cell_scale),
+                pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size),
             )
 
-    if ant_position is not None:
-        ant_r, ant_c = ant_position
+    if ant_pos is not None:
+        row, col = ant_pos
         center = (
-            ant_c * cell_scale + cell_scale // 2,
-            ant_r * cell_scale + cell_scale // 2,
+            col * cell_size + cell_size // 2,
+            row * cell_size + cell_size // 2,
         )
-        radius = max(2, cell_scale // 3)
-        pygame.draw.circle(surface, ant_color, center, radius)
+        pygame.draw.circle(surface, ant_color, center, max(2, cell_size // 3))
 
     return surface
 
 
-def run_visualizer(ant, cell_scale=6, fps=60, max_steps=None, title="Langton's Ant"):
-    """Run the pygame event loop for a Langton's Ant simulation."""
+def run_simulation(ant, cell_size=6, fps=60, max_steps=None, title="Langton's Ant"):
     pygame.init()
 
-    grid = ant.get_states()
-    screen = pygame.display.set_mode((grid.shape[1] * cell_scale, grid.shape[0] * cell_scale))
+    board = ant.get_grid()
+
+    screen = pygame.display.set_mode(
+        (board.shape[1] * cell_size, board.shape[0] * cell_size)
+    )
+
     pygame.display.set_caption(title)
+
     clock = pygame.time.Clock()
 
-    finished = False
+    running = True
     steps = 0
-    while not finished:
+
+    while running:
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                finished = True
+                running = False
 
-        surface = build_surface(grid, cell_scale, ant_position=ant.get_current_position())
+        surface = draw_grid(board, cell_size, ant.get_position())
         screen.blit(surface, (0, 0))
         pygame.display.flip()
 
-        ant.step()
-        grid = ant.get_states()
+        ant.move()
+        board = ant.get_grid()
+
         steps += 1
+
         if max_steps is not None and steps >= max_steps:
-            finished = True
+            running = False
 
         clock.tick(fps)
 
     pygame.quit()
 
 
-def parse_args():
-    """Parse command-line options for the visualizer."""
-    parser = argparse.ArgumentParser(description="Langton's Ant pygame visualizer")
-    parser.add_argument("--size", type=int, default=200, help="Grid size (NxN)")
-    parser.add_argument("--row", type=int, default=None, help="Starting row")
-    parser.add_argument("--col", type=int, default=None, help="Starting column")
-    parser.add_argument("--cell-scale", type=int, default=6, help="Pixel scale per cell")
-    parser.add_argument("--fps", type=int, default=60, help="Frames per second")
-    parser.add_argument("--steps", type=int, default=None, help="Maximum simulation steps")
+def get_args():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--size", type=int, default=200)
+    parser.add_argument("--row", type=int, default=None)
+    parser.add_argument("--col", type=int, default=None)
+    parser.add_argument("--cell-scale", type=int, default=6)
+    parser.add_argument("--fps", type=int, default=60)
+    parser.add_argument("--steps", type=int, default=None)
+
     parser.add_argument(
         "--multi-color",
         action="store_true",
-        help="Use a simple four-color rule set instead of the default two-color rule set",
     )
+
     return parser.parse_args()
 
 
 def main():
-    """Create the ant and launch the visualizer."""
-    args = parse_args()
+    args = get_args()
+
     start_row = args.row if args.row is not None else args.size // 2
     start_col = args.col if args.col is not None else args.size // 2
+
     rules = MULTI_COLOR_RULES if args.multi_color else DEFAULT_RULES
 
     ant = LangtonsAnt(args.size, (start_row, start_col), rules)
-    run_visualizer(
+
+    run_simulation(
         ant,
-        cell_scale=args.cell_scale,
+        cell_size=args.cell_scale,
         fps=args.fps,
         max_steps=args.steps,
         title="Langton's Ant",
