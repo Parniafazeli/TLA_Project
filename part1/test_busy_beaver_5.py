@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
 
 from turing_machine import TuringMachine
 from test_turing_machine_example1 import print_states
 
-
-
-# Busy Beaver 5-state نمونه
-# فقط کافی است بیشتر از 2،3،4 حالت قبلی باشد
 
 transitions = {
     

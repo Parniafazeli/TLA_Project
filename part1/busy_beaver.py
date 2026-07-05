@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 from turing_machine import TuringMachine
 
 beaver_programs = [
     {},  # 0
 
-    # 1-state: 1 one
     {
         ('a', '0'): ('h', '1', 'R'),
     },
@@ -27,7 +25,7 @@ beaver_programs = [
         ('c', '1'): ('h', '1', 'R'),
     },
 
-    # 4-state: 13 ones (تصحیح شد)
+    # 4-state: 13 ones 
     {
         ('a', '0'): ('b', '1', 'R'),
         ('a', '1'): ('b', '1', 'L'),
@@ -36,7 +34,7 @@ beaver_programs = [
         ('c', '0'): ('d', '1', 'L'),
         ('c', '1'): ('h', '1', 'R'),
         ('d', '0'): ('a', '1', 'L'),
-        ('d', '1'): ('d', '0', 'R'),   # ← مهم: 0 بنویس، نه 1
+        ('d', '1'): ('d', '0', 'R'),   
     },
 
     # 5-state: 4098 ones
@@ -53,8 +51,6 @@ beaver_programs = [
         ('e', '1'): ('c', '0', 'L'),
     },
 
-    # 6-state: (اختیاری)
-    {},
 ]
 
 def busy_beaver(n):

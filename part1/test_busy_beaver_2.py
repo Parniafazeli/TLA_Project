@@ -16,8 +16,8 @@ if __name__ == "__main__":
         start_state='a',
         accept_state='qa',
         reject_state='r',
-        blank_symbol='0'        # مهم: تنظیم blank_symbol به '0'
+        blank_symbol='0'        
     )
     print("================")
     print("BB with 2 states")
-    tm.debug("", step_limit=50) # نقطهٔ اضافی حذف شد
+    tm.debug("", step_limit=50) 

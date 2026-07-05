@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from turing_machine import TuringMachine
 from test_turing_machine_example1 import print_states
 
@@ -20,6 +19,6 @@ if __name__ == "__main__":
         start_state='a',
         accept_state='qa',
         reject_state='r',
-        blank_symbol='0'        # مهم: تنظیم blank_symbol به '0'
+        blank_symbol='0'        
     )
     tm.debug("", step_limit=200)
