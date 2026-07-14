@@ -5,8 +5,8 @@ Game of life script with animated evolution
 import conway
 from pygame_viewer import run_pygame_life
 
-N = 64
-CELL_SCALE = 10
+N = 128
+CELL_SCALE = 4
 
 
 def main():

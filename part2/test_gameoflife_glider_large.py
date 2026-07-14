@@ -17,10 +17,10 @@ def main():
     # life.insertGlider((0,0))
     # life.insertGliderGun((0,0))
     #life.insertFromFile("dragon spaceship.cells", (0,100))
-    # life.insertFromFile("ak94 gun.cells", (100,100))
+    #life.insertFromFile("ak94 gun.cells", (100,100))
     # life.insertFromFile("vacuumgun gun.cells", (100,100))
-    # life.insertFromFile("stargate oscillator.cells", (100,100))
-    # life.insertFromFile("7enginecordership spaceship.cells", (100,100))
+    #life.insertFromFile("stargate oscillator.cells", (100,100))
+    #life.insertFromFile("7enginecordership spaceship.cells", (100,100))
     life.insertFromFile("3enginecordership gun 279x258.cells", (100, 100))
     # In a cellular automaton, a gun is a pattern with a main part that repeats periodically, like an oscillator,
     # and that also periodically emits spaceships. but here the gun is not emit periodically and the left end did not work.
