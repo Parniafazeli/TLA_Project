@@ -269,7 +269,7 @@ class GameOfLife:
         self.grid[index[0] + 4, index[1] + 36] = self.aliveValue
         self.grid[index[0] + 4, index[1] + 37] = self.aliveValue
         
-        # FIXED: corrected left block coordinates (shifted back by 1 column)
+        
         self.grid[index[0] + 5, index[1] + 2] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 3] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 12] = self.aliveValue

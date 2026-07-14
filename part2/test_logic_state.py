@@ -14,11 +14,3 @@ print("0 ->", gate.run_not_gate(False))
 print("1 ->", gate.run_not_gate(True))
 
 
-#g = gate.setup_and_gate(
-#    input_a_present=True,
-#    input_b_present=True)
-#
-#for i in range(100):
-#    g.evolve()
-#
-#print(g.grid[15:17, 12:14])
