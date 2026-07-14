@@ -261,13 +261,14 @@ class GameOfLife:
         self.grid[index[0] + 3, index[1] + 36] = self.aliveValue
         self.grid[index[0] + 3, index[1] + 37] = self.aliveValue
 
+
         self.grid[index[0] + 4, index[1] + 13] = self.aliveValue
         self.grid[index[0] + 4, index[1] + 17] = self.aliveValue
         self.grid[index[0] + 4, index[1] + 22] = self.aliveValue
         self.grid[index[0] + 4, index[1] + 23] = self.aliveValue
         self.grid[index[0] + 4, index[1] + 36] = self.aliveValue
         self.grid[index[0] + 4, index[1] + 37] = self.aliveValue
-
+        
         # FIXED: corrected left block coordinates (shifted back by 1 column)
         self.grid[index[0] + 5, index[1] + 2] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 3] = self.aliveValue
@@ -275,6 +276,7 @@ class GameOfLife:
         self.grid[index[0] + 5, index[1] + 18] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 22] = self.aliveValue
         self.grid[index[0] + 5, index[1] + 23] = self.aliveValue
+
 
         self.grid[index[0] + 6, index[1] + 2] = self.aliveValue
         self.grid[index[0] + 6, index[1] + 3] = self.aliveValue
@@ -285,13 +287,13 @@ class GameOfLife:
         self.grid[index[0] + 6, index[1] + 24] = self.aliveValue
         self.grid[index[0] + 6, index[1] + 26] = self.aliveValue
 
+
         self.grid[index[0] + 7, index[1] + 12] = self.aliveValue
         self.grid[index[0] + 7, index[1] + 18] = self.aliveValue
         self.grid[index[0] + 7, index[1] + 26] = self.aliveValue
-
+        
         self.grid[index[0] + 8, index[1] + 13] = self.aliveValue
         self.grid[index[0] + 8, index[1] + 17] = self.aliveValue
-
         self.grid[index[0] + 9, index[1] + 14] = self.aliveValue
         self.grid[index[0] + 9, index[1] + 15] = self.aliveValue
 

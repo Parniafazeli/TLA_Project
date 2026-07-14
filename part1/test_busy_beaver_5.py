@@ -14,7 +14,7 @@ transitions = {
     ('d','0'): ('d','1','R'),
     ('d','1'): ('a','0','R'),
     ('e','0'): ('e','1','R'),
-    ('e','1'): ('qa','1','L'),
+    ('e','1'): ('h','1','L'),
 
 }
 
@@ -28,9 +28,9 @@ if __name__ == "__main__":
     tm = TuringMachine(
         transitions,
         start_state='a',
-        accept_state='qa',
+        accept_state='h',
         reject_state='r',
         blank_symbol='0'
 
     )
-    tm.debug("", step_limit=5000)
+    tm.debug("", step_limit=300)

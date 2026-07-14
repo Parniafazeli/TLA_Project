@@ -1,7 +1,6 @@
 from logic_gates import GliderLogicGates
 
 gate = GliderLogicGates()
-
 print("AND Gate")
 print("0 0 ->", gate.run_and_gate(False, False))
 print("0 1 ->", gate.run_and_gate(False, True))

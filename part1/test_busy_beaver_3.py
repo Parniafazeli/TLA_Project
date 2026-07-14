@@ -7,7 +7,7 @@ transitions = {
     ('b', '0'): ('a', '1', 'L'),
     ('b', '1'): ('b', '1', 'R'),
     ('c', '0'): ('b', '1', 'L'),
-    ('c', '1'): ('qa', '1', 'R'),
+    ('c', '1'): ('h', '1', 'R'),
 }
 
 if __name__ == "__main__":
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     tm = TuringMachine(
         transitions,
         start_state='a',
-        accept_state='qa',
+        accept_state='h',
         reject_state='r',
         blank_symbol='0'        
     )

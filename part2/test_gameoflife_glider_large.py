@@ -16,7 +16,7 @@ def main():
     # life.insertBlinker((0,0))
     # life.insertGlider((0,0))
     # life.insertGliderGun((0,0))
-    # life.insertFromFile("dragon spaceship.cells", (0,100))
+    #life.insertFromFile("dragon spaceship.cells", (0,100))
     # life.insertFromFile("ak94 gun.cells", (100,100))
     # life.insertFromFile("vacuumgun gun.cells", (100,100))
     # life.insertFromFile("stargate oscillator.cells", (100,100))
